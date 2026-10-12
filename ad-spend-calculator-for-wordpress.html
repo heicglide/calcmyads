@@ -1,0 +1,207 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Ad Spend Calculator for WordPress — Budget, Orders and ROAS</title>
+<meta name="description" content="Estimate what a monthly ad budget produces on a WordPress or WooCommerce site: clicks, orders, revenue and ROAS. Includes WordPress speed and tracking checks.">
+<link rel="canonical" href="https://calcmyads.com/ad-spend-calculator-for-wordpress.html">
+<meta name="robots" content="index,follow,max-image-preview:large">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Ad Spend Calculator for WordPress — Budget, Orders and ROAS">
+<meta property="og:description" content="Estimate what a monthly ad budget produces on a WordPress or WooCommerce site: clicks, orders, revenue and ROAS. Includes WordPress speed and tracking checks.">
+<meta property="og:url" content="https://calcmyads.com/ad-spend-calculator-for-wordpress.html">
+<meta property="og:site_name" content="CalcMyAds">
+<meta name="twitter:card" content="summary">
+<style>
+:root{
+  --ink:#111827; --muted:#4b5563; --line:#e5e7eb; --bg:#ffffff; --soft:#f9fafb;
+  --brand:#1d4ed8; --brand-dark:#1e40af; --brand-soft:#eff6ff; --good:#047857;
+}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--bg);color:var(--ink);
+  font:16px/1.65 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif}
+.wrap{max-width:860px;margin:0 auto;padding:0 20px}
+header.site{border-bottom:1px solid var(--line);background:#fff;position:sticky;top:0;z-index:20}
+header.site .wrap{display:flex;align-items:center;gap:18px;min-height:60px;flex-wrap:wrap}
+.brand{font-weight:700;font-size:17px;color:var(--ink);text-decoration:none;letter-spacing:-.01em}
+.brand span{color:var(--brand)}
+nav.main{display:flex;gap:16px;flex-wrap:wrap;margin-left:auto}
+nav.main a{color:var(--muted);text-decoration:none;font-size:14px;font-weight:500}
+nav.main a:hover{color:var(--brand)}
+nav.main a[aria-current="page"]{color:var(--brand)}
+main{padding:28px 0 8px}
+.eyebrow{color:var(--brand);font-size:13px;font-weight:600;letter-spacing:.04em;text-transform:uppercase;margin:0 0 6px}
+h1{font-size:32px;line-height:1.2;margin:0 0 10px;letter-spacing:-.02em}
+h2{font-size:23px;line-height:1.3;margin:38px 0 10px;letter-spacing:-.01em}
+h3{font-size:18px;margin:24px 0 6px}
+p{margin:0 0 14px;color:var(--muted)}
+p.lead{font-size:18px;color:var(--ink)}
+ul,ol{color:var(--muted);padding-left:22px;margin:0 0 16px}
+li{margin:6px 0}
+a{color:var(--brand)}
+.answer{border-left:3px solid var(--brand);background:var(--brand-soft);padding:12px 16px;border-radius:0 8px 8px 0;margin:0 0 18px}
+.answer p{margin:0;color:var(--ink)}
+.calc{border:1px solid var(--line);border-radius:12px;background:var(--soft);padding:20px;margin:22px 0}
+.calc h2{margin:0 0 4px;font-size:19px}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+@media(max-width:560px){.grid{grid-template-columns:1fr}}
+label{display:block;font-size:13px;font-weight:600;color:var(--ink);margin-bottom:4px}
+input,select{width:100%;padding:10px 12px;border:1px solid #d1d5db;border-radius:8px;font-size:16px;background:#fff;color:var(--ink)}
+input:focus,select:focus{outline:2px solid var(--brand);outline-offset:1px;border-color:var(--brand)}
+.hint{font-size:12.5px;color:var(--muted);margin-top:4px}
+.result{margin-top:16px;border:1px solid #bfdbfe;background:#fff;border-radius:10px;padding:14px 16px}
+.result .big{font-size:30px;font-weight:700;color:var(--brand-dark);line-height:1.15;margin:2px 0 4px}
+.result .sub{font-size:13.5px;color:var(--muted);margin:0}
+button{font:inherit;padding:10px 14px;border-radius:8px;border:1px solid #d1d5db;background:#fff;color:var(--ink);cursor:pointer}
+button:hover{border-color:#9ca3af}
+button.primary{background:var(--brand);border-color:var(--brand);color:#fff}
+button.primary:hover{background:var(--brand-dark)}
+code{background:#f3f4f6;border:1px solid var(--line);border-radius:6px;padding:1px 6px;font-size:14.5px;
+  font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace}
+.formula{background:#111827;color:#f9fafb;border-radius:10px;padding:14px 16px;margin:0 0 16px;
+  font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:14.5px;overflow-x:auto}
+table{width:100%;border-collapse:collapse;margin:0 0 16px;font-size:15px}
+th,td{text-align:left;padding:9px 10px;border-bottom:1px solid var(--line)}
+th{background:var(--soft);font-size:13px;text-transform:uppercase;letter-spacing:.03em;color:var(--muted)}
+td.num{font-variant-numeric:tabular-nums}
+.faq{border:1px solid var(--line);border-radius:10px;padding:14px 18px;margin:0 0 12px}
+.faq h3{margin:0 0 6px;font-size:16.5px}
+.faq p{margin:0}
+.note{font-size:13.5px;color:var(--muted);background:var(--soft);border:1px solid var(--line);border-radius:10px;padding:12px 14px}
+.cards{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:8px 0 4px}
+@media(max-width:560px){.cards{grid-template-columns:1fr}}
+.card{border:1px solid var(--line);border-radius:10px;padding:12px 14px;text-decoration:none;display:block}
+.card:hover{border-color:var(--brand);background:var(--brand-soft)}
+.card b{display:block;color:var(--ink);font-size:15.5px;margin-bottom:2px}
+.card span{color:var(--muted);font-size:13.5px}
+footer.site{border-top:1px solid var(--line);margin-top:44px;padding:24px 0 40px;background:var(--soft)}
+footer.site p{font-size:13.5px;margin:0 0 8px}
+footer.site a{color:var(--muted);text-decoration:none;font-size:13.5px}
+footer.site a:hover{color:var(--brand)}
+.footlinks{display:flex;gap:14px;flex-wrap:wrap}
+.skip{position:absolute;left:-9999px}
+</style>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Home", "item": "https://calcmyads.com/"}, {"@type": "ListItem", "position": 2, "name": "Ad Spend Calculator for WordPress", "item": "https://calcmyads.com/ad-spend-calculator-for-wordpress.html"}]}</script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "WebApplication", "name": "Ad Spend Calculator for WordPress", "url": "https://calcmyads.com/ad-spend-calculator-for-wordpress.html", "applicationCategory": "BusinessApplication", "operatingSystem": "Any (web browser)", "browserRequirements": "Requires JavaScript", "description": "Calculator that estimates clicks, orders, revenue and ROAS from a monthly ad budget for a WordPress or WooCommerce site.", "offers": {"@type": "Offer", "price": "0", "priceCurrency": "USD"}, "isAccessibleForFree": true, "publisher": {"@type": "Organization", "name": "CalcMyAds", "url": "https://calcmyads.com/"}}</script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "How much should I spend on ads for a WordPress site?", "acceptedAnswer": {"@type": "Answer", "text": "Enough to gather data: $500-$1,500 per month for a first test, then scale from a revenue or lead goal. Keep each campaign funded to about 50 conversions per week, otherwise the platform cannot optimise reliably."}}, {"@type": "Question", "name": "How do I track ad conversions on WordPress?", "acceptedAnswer": {"@type": "Answer", "text": "Install GA4 (Site Kit or a single analytics plugin) and your ad platform's pixel, mark the thank-you page or order confirmation as a conversion, and use UTM tags on ad URLs. Reconcile platform-reported conversions against WooCommerce orders weekly."}}, {"@type": "Question", "name": "Does WordPress page speed affect my ad costs?", "acceptedAnswer": {"@type": "Answer", "text": "Yes. Slow landing pages lower conversion rate, which raises your effective cost per acquisition, and on Google Search they can raise CPC through landing page experience. Compress images, limit plugins on the landing page and test the exact URL you advertise."}}, {"@type": "Question", "name": "What ROAS should a WooCommerce store target?", "acceptedAnswer": {"@type": "Answer", "text": "Work from break-even ROAS: 1 divided by gross margin. A 40% margin store breaks even at 2.50x and should target above that plus a buffer for returns and fees. Reported ecommerce medians sit around 2x-3x."}}, {"@type": "Question", "name": "Should I use Google Ads or Meta for a WordPress site?", "acceptedAnswer": {"@type": "Answer", "text": "Google captures existing demand and usually converts at a higher rate; Meta creates demand with cheaper impressions. Start with the channel that matches how your customers already find you, then add the other once tracking is reliable."}}, {"@type": "Question", "name": "Is this calculator the same as a general ad spend calculator?", "acceptedAnswer": {"@type": "Answer", "text": "The arithmetic is the same. This page adds the WordPress-specific checks that most often change the outcome: landing page speed, plugin conflicts on the checkout, and conversion tracking reliability."}}]}</script>
+</head>
+<body>
+<header class="site"><div class="wrap"><a class="brand" href="index.html">Calc<span>MyAds</span></a><nav class="main" aria-label="Main"><a href="index.html">CPM</a><a href="cpc-calculator.html">CPC</a><a href="ctr-calculator.html">CTR</a><a href="roas-calculator.html">ROAS</a><a href="roi-calculator.html">ROI</a><a href="cpm-benchmarks.html">Benchmarks</a><a href="guides.html">Guides</a></nav></div></header>
+<main class="wrap">
+
+<p class="eyebrow">WordPress sites and WooCommerce</p>
+<h1>Ad Spend Calculator for WordPress</h1>
+<p class="lead">See what a monthly ad budget will produce on a WordPress or WooCommerce site &mdash; clicks, orders, revenue and ROAS &mdash; before you commit the spend.</p>
+
+<div class="answer"><p><b>Quick answer:</b> $3,000 of ad spend at a $0.90 CPC buys about 3,333 visits. At a 2.5% conversion rate and a $95 average order value, that is roughly 83 orders and $7,916 of revenue &mdash; a 2.64x ROAS.</p></div>
+
+<section class="calc">
+  <h2>Budget outcome calculator</h2>
+  <p class="hint" style="margin-bottom:14px">Enter your monthly budget and your site's own numbers. All amounts in USD.</p>
+  <div class="grid">
+    <div>
+      <label for="budget">Monthly ad budget (USD)</label>
+      <input id="budget" type="number" inputmode="decimal" min="0" step="any" placeholder="3000">
+    </div>
+    <div>
+      <label for="cpc">Average CPC (USD)</label>
+      <input id="cpc" type="number" inputmode="decimal" min="0" step="any" placeholder="0.90">
+    </div>
+    <div>
+      <label for="cvr">Conversion rate (%)</label>
+      <input id="cvr" type="number" inputmode="decimal" min="0" step="any" placeholder="2.5">
+      <p class="hint">Orders &divide; sessions, same date range, paid traffic only if you can segment it.</p>
+    </div>
+    <div>
+      <label for="aov">Average order value (USD)</label>
+      <input id="aov" type="number" inputmode="decimal" min="0" step="any" placeholder="95">
+    </div>
+  </div>
+  <div class="result" role="status" aria-live="polite">
+    <p class="sub">Estimated outcome</p>
+    <div class="big" id="out">&mdash;</div>
+    <p class="sub" id="sub">Enter your budget, CPC, conversion rate and AOV.</p>
+  </div>
+  <p style="margin:14px 0 0"><button type="button" id="reset">Reset</button></p>
+</section>
+
+<h2>How the estimate is built</h2>
+<ol>
+  <li><b>Clicks</b> = budget &divide; CPC</li>
+  <li><b>Orders</b> = clicks &times; conversion rate</li>
+  <li><b>Revenue</b> = orders &times; average order value</li>
+  <li><b>ROAS</b> = revenue &divide; budget</li>
+</ol>
+<table>
+  <thead><tr><th>Budget</th><th>CPC</th><th>Clicks</th><th>CVR</th><th>Orders</th><th>AOV</th><th>Revenue</th><th>ROAS</th></tr></thead>
+  <tbody>
+    <tr><td class="num">$1,000</td><td class="num">$0.90</td><td class="num">1,111</td><td class="num">2.5%</td><td class="num">28</td><td class="num">$95</td><td class="num">$2,639</td><td class="num">2.64x</td></tr>
+    <tr><td class="num">$3,000</td><td class="num">$0.90</td><td class="num">3,333</td><td class="num">2.5%</td><td class="num">83</td><td class="num">$95</td><td class="num">$7,916</td><td class="num">2.64x</td></tr>
+    <tr><td class="num">$3,000</td><td class="num">$1.50</td><td class="num">2,000</td><td class="num">2.5%</td><td class="num">50</td><td class="num">$95</td><td class="num">$4,750</td><td class="num">1.58x</td></tr>
+    <tr><td class="num">$5,000</td><td class="num">$0.90</td><td class="num">5,556</td><td class="num">3.5%</td><td class="num">194</td><td class="num">$95</td><td class="num">$18,472</td><td class="num">3.69x</td></tr>
+  </tbody>
+</table>
+<p>Compare the ROAS column with your break-even ROAS (1 &divide; gross margin) before treating any of these as a green light &mdash; the <a href="roas-calculator.html">ROAS calculator</a> does that check, and the <a href="cpc-calculator.html">CPC calculator</a> shows how CPC and conversion rate combine into cost per acquisition.</p>
+
+<h2>What matters specifically on WordPress</h2>
+<ul>
+  <li><b>Page speed is usually the biggest handicap.</b> Plugin-heavy WordPress sites often load slowly on mobile, which raises CPC on search (through landing page experience) and lowers conversion rate on social. Test the speed of the exact landing page you send paid traffic to, not the homepage.</li>
+  <li><b>Do not install a tracking plugin stack blindly.</b> GA4 through Site Kit or a single analytics plugin, plus the Meta pixel if you run Meta ads, is enough. Conflicting plugins double-count conversions and make ROAS unreliable.</li>
+  <li><b>Check WooCommerce checkout for friction.</b> Guest checkout, a single page instead of a multi-step form, saved payment methods and visible shipping costs all raise conversion rate more than any bid change.</li>
+  <li><b>Watch for plugin conflicts on landing pages.</b> Pop-up, chat and cookie plugins are the most common cause of layout shifts that push the buy button off-screen on mobile.</li>
+  <li><b>Keep a staging copy of the landing page.</b> Test headline, offer and form length there, then push the winner live. Small WordPress sites rarely get enough traffic for frequent split tests.</li>
+  <li><b>Cache, but exclude the cart and checkout.</b> Caching those pages breaks sessions and can cost you orders.</li>
+</ul>
+
+<h2>Budget tiers for WordPress sites</h2>
+<table>
+  <thead><tr><th>Stage</th><th>Monthly ad budget</th><th>Priority</th></tr></thead>
+  <tbody>
+    <tr><td>New site, no conversion data</td><td class="num">$500&ndash;$1,500</td><td>One channel, one offer. Fix speed and checkout before scaling.</td></tr>
+    <tr><td>WooCommerce store with sales</td><td class="num">$1,500&ndash;$6,000</td><td>Google Shopping or Performance Max plus retargeting on the platform that brought the first visit.</td></tr>
+    <tr><td>Service site generating leads</td><td class="num">$1,000&ndash;$4,000</td><td>Search ads on high-intent local or service queries; measure cost per lead, not ROAS.</td></tr>
+    <tr><td>Scaling with proven unit economics</td><td class="num">$6,000+</td><td>Add a second channel, then protect brand terms from competitors.</td></tr>
+  </tbody>
+</table>
+<p class="note">For lead-generation sites, replace average order value with lead value and conversion rate with lead rate. The arithmetic is identical: budget &divide; CPC = clicks, clicks &times; lead rate = leads, leads &times; lead value = revenue.</p>
+
+<h2>Frequently asked questions</h2>
+<div class="faq"><h3>How much should I spend on ads for a WordPress site?</h3><p>Enough to gather data: $500&ndash;$1,500 per month for a first test, then scale from a revenue or lead goal. Keep each campaign funded to about 50 conversions per week, otherwise the platform cannot optimise reliably.</p></div>
+<div class="faq"><h3>How do I track ad conversions on WordPress?</h3><p>Install GA4 (Site Kit or a single analytics plugin) and your ad platform's pixel, mark the thank-you page or order confirmation as a conversion, and use UTM tags on ad URLs. Reconcile platform-reported conversions against WooCommerce orders weekly.</p></div>
+<div class="faq"><h3>Does WordPress page speed affect my ad costs?</h3><p>Yes. Slow landing pages lower conversion rate, which raises your effective cost per acquisition, and on Google Search they can raise CPC through landing page experience. Compress images, limit plugins on the landing page and test the exact URL you advertise.</p></div>
+<div class="faq"><h3>What ROAS should a WooCommerce store target?</h3><p>Work from break-even ROAS: 1 divided by gross margin. A 40% margin store breaks even at 2.50x and should target above that plus a buffer for returns and fees. Reported ecommerce medians sit around 2x&ndash;3x.</p></div>
+<div class="faq"><h3>Should I use Google Ads or Meta for a WordPress site?</h3><p>Google captures existing demand and usually converts at a higher rate; Meta creates demand with cheaper impressions. Start with the channel that matches how your customers already find you, then add the other once tracking is reliable.</p></div>
+<div class="faq"><h3>Is this calculator the same as a general ad spend calculator?</h3><p>The arithmetic is the same. This page adds the WordPress-specific checks that most often change the outcome: landing page speed, plugin conflicts on the checkout, and conversion tracking reliability.</p></div>
+
+<script>
+(function(){
+  var out=document.getElementById('out'),sub=document.getElementById('sub');
+  var f={budget:document.getElementById('budget'),cpc:document.getElementById('cpc'),cvr:document.getElementById('cvr'),aov:document.getElementById('aov')};
+  function v(el){var x=parseFloat(el.value);return isFinite(x)&&x>0?x:null;}
+  function usd(x){return '$'+x.toLocaleString('en-US',{maximumFractionDigits:0});}
+  function int(x){return x.toLocaleString('en-US',{maximumFractionDigits:0});}
+  function run(){
+    var b=v(f.budget),p=v(f.cpc),c=v(f.cvr),a=v(f.aov),o='\u2014',msg='Enter your budget, CPC, conversion rate and AOV.';
+    if(b&&p&&c&&a){
+      var clicks=b/p, orders=clicks*(c/100), rev=orders*a, roas=rev/b;
+      o=usd(rev)+' revenue \u00b7 '+roas.toFixed(2)+'x ROAS';
+      msg=int(clicks)+' clicks \u2192 '+int(orders)+' orders at '+usd(a)+' AOV';
+      if(roas<2){msg+=' \u2014 check break-even ROAS (1 \u00f7 gross margin) before scaling';}
+    }
+    out.innerHTML=o;sub.textContent=msg;
+  }
+  ['input','change'].forEach(function(ev){[f.budget,f.cpc,f.cvr,f.aov].forEach(function(el){el.addEventListener(ev,run);});});
+  document.getElementById('reset').addEventListener('click',function(){
+    f.budget.value='';f.cpc.value='';f.cvr.value='';f.aov.value='';run();
+  });
+  run();
+})();
+</script>
+
+<h2>Related calculators</h2><div class="cards"><a class="card" href="index.html"><b>CPM Calculator</b><span>cost per 1,000 impressions</span></a><a class="card" href="ad-cost-calculator.html"><b>Ad Cost Calculator</b><span>campaign cost from CPM</span></a><a class="card" href="impressions-calculator.html"><b>Impressions Calculator</b><span>impressions from budget</span></a><a class="card" href="roas-calculator.html"><b>ROAS Calculator</b><span>return on ad spend</span></a><a class="card" href="ctr-calculator.html"><b>CTR Calculator</b><span>click-through rate</span></a><a class="card" href="cpc-calculator.html"><b>CPC Calculator</b><span>cost per click</span></a><a class="card" href="ad-spend-calculator-for-squarespace.html"><b>Ad Spend Calculator for Squarespace</b><span>budget for Squarespace stores</span></a><a class="card" href="roi-calculator.html"><b>Marketing ROI Calculator</b><span>net return on ad spend and cost</span></a><a class="card" href="cpm-benchmarks.html"><b>CPM benchmarks 2026</b><span>reported ranges by platform and vertical</span></a></div>
+</main>
+<footer class="site"><div class="wrap"><div class="footlinks"><a href="index.html">CPM Calculator</a><a href="ad-cost-calculator.html">Ad Cost Calculator</a><a href="impressions-calculator.html">Impressions Calculator</a><a href="roas-calculator.html">ROAS Calculator</a><a href="ctr-calculator.html">CTR Calculator</a><a href="cpc-calculator.html">CPC Calculator</a><a href="ad-spend-calculator-for-squarespace.html">Ad Spend Calculator for Squarespace</a><a href="roi-calculator.html">Marketing ROI Calculator</a><a href="cpm-benchmarks.html">CPM benchmarks</a><a href="ecpm-calculator.html">eCPM</a><a href="guides.html">Guides</a><a href="about.html">About</a><a href="contact.html">Contact</a></div><p style="margin-top:14px">CalcMyAds is a free advertising calculator set: CPM, CPC, CTR, ROAS, ad cost and impressions. Calculations run in your browser and your numbers are never uploaded.</p><p>Results are planning estimates, not financial advice or a performance guarantee.</p></div></footer>
+</body>
+</html>

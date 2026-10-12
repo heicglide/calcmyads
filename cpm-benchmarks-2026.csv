@@ -1,0 +1,18 @@
+Platform,Metric,Low,High,Unit,Notes
+Meta (Facebook + Instagram),CPM,5,14,USD,Broad reach under $10; all-industry averages reported near $14 in 2026
+TikTok,CPM,4,16,USD,Low end for reach and ecommerce campaigns
+Google Display / programmatic,CPM,2,12,USD,Cheapest digital inventory; quality varies by placement
+YouTube in-stream,CPM,6,20,USD,"Priced above display, below premium TV"
+LinkedIn,CPM,30,100,USD,Highest of the major platforms; professional targeting
+Pinterest,CPM,5,15,USD,Seasonal spikes around US holiday planning
+Google Search,CTR,6,7,percent,"Channel CTR, not CPM priced"
+Meta feed,CTR,0.8,1.2,percent,Interruption-based inventory
+TikTok in-feed,CTR,0.8,1.5,percent,"Sound-on, high-volume feed"
+LinkedIn,CTR,0.4,0.6,percent,Low browsing intent
+Display / programmatic,CTR,0.2,0.6,percent,Well under 1 percent
+Ecommerce overall,ROAS,2.0,2.9,x,Reported medians across 2026 studies
+Apparel & accessories,ROAS,3.5,4.2,x,
+Arts & entertainment,ROAS,2.9,3.4,x,
+Beauty & personal care,ROAS,2.0,2.4,x,
+Q4 holiday peak,ROAS,4.0,5.0,x,Seasonal peak for US ecommerce
+US Q4 vs annual average,CPM change,20,30,percent higher,Competition for holiday inventory

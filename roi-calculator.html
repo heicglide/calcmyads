@@ -1,0 +1,207 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Marketing ROI Calculator — Net Return on Marketing Cost</title>
+<meta name="description" content="Free marketing ROI calculator: work out net return on marketing cost, compare ROI with ROAS, and decide which costs belong in the calculation.">
+<link rel="canonical" href="https://calcmyads.com/roi-calculator.html">
+<meta name="robots" content="index,follow,max-image-preview:large">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Marketing ROI Calculator — Net Return on Marketing Cost">
+<meta property="og:description" content="Free marketing ROI calculator: work out net return on marketing cost, compare ROI with ROAS, and decide which costs belong in the calculation.">
+<meta property="og:url" content="https://calcmyads.com/roi-calculator.html">
+<meta property="og:site_name" content="CalcMyAds">
+<meta name="twitter:card" content="summary">
+<style>
+:root{
+  --ink:#111827; --muted:#4b5563; --line:#e5e7eb; --bg:#ffffff; --soft:#f9fafb;
+  --brand:#1d4ed8; --brand-dark:#1e40af; --brand-soft:#eff6ff; --good:#047857;
+}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--bg);color:var(--ink);
+  font:16px/1.65 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif}
+.wrap{max-width:860px;margin:0 auto;padding:0 20px}
+header.site{border-bottom:1px solid var(--line);background:#fff;position:sticky;top:0;z-index:20}
+header.site .wrap{display:flex;align-items:center;gap:18px;min-height:60px;flex-wrap:wrap}
+.brand{font-weight:700;font-size:17px;color:var(--ink);text-decoration:none;letter-spacing:-.01em}
+.brand span{color:var(--brand)}
+nav.main{display:flex;gap:16px;flex-wrap:wrap;margin-left:auto}
+nav.main a{color:var(--muted);text-decoration:none;font-size:14px;font-weight:500}
+nav.main a:hover{color:var(--brand)}
+nav.main a[aria-current="page"]{color:var(--brand)}
+main{padding:28px 0 8px}
+.eyebrow{color:var(--brand);font-size:13px;font-weight:600;letter-spacing:.04em;text-transform:uppercase;margin:0 0 6px}
+h1{font-size:32px;line-height:1.2;margin:0 0 10px;letter-spacing:-.02em}
+h2{font-size:23px;line-height:1.3;margin:38px 0 10px;letter-spacing:-.01em}
+h3{font-size:18px;margin:24px 0 6px}
+p{margin:0 0 14px;color:var(--muted)}
+p.lead{font-size:18px;color:var(--ink)}
+ul,ol{color:var(--muted);padding-left:22px;margin:0 0 16px}
+li{margin:6px 0}
+a{color:var(--brand)}
+.answer{border-left:3px solid var(--brand);background:var(--brand-soft);padding:12px 16px;border-radius:0 8px 8px 0;margin:0 0 18px}
+.answer p{margin:0;color:var(--ink)}
+.calc{border:1px solid var(--line);border-radius:12px;background:var(--soft);padding:20px;margin:22px 0}
+.calc h2{margin:0 0 4px;font-size:19px}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+@media(max-width:560px){.grid{grid-template-columns:1fr}}
+label{display:block;font-size:13px;font-weight:600;color:var(--ink);margin-bottom:4px}
+input,select{width:100%;padding:10px 12px;border:1px solid #d1d5db;border-radius:8px;font-size:16px;background:#fff;color:var(--ink)}
+input:focus,select:focus{outline:2px solid var(--brand);outline-offset:1px;border-color:var(--brand)}
+.hint{font-size:12.5px;color:var(--muted);margin-top:4px}
+.result{margin-top:16px;border:1px solid #bfdbfe;background:#fff;border-radius:10px;padding:14px 16px}
+.result .big{font-size:30px;font-weight:700;color:var(--brand-dark);line-height:1.15;margin:2px 0 4px}
+.result .sub{font-size:13.5px;color:var(--muted);margin:0}
+button{font:inherit;padding:10px 14px;border-radius:8px;border:1px solid #d1d5db;background:#fff;color:var(--ink);cursor:pointer}
+button:hover{border-color:#9ca3af}
+button.primary{background:var(--brand);border-color:var(--brand);color:#fff}
+button.primary:hover{background:var(--brand-dark)}
+code{background:#f3f4f6;border:1px solid var(--line);border-radius:6px;padding:1px 6px;font-size:14.5px;
+  font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace}
+.formula{background:#111827;color:#f9fafb;border-radius:10px;padding:14px 16px;margin:0 0 16px;
+  font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:14.5px;overflow-x:auto}
+table{width:100%;border-collapse:collapse;margin:0 0 16px;font-size:15px}
+th,td{text-align:left;padding:9px 10px;border-bottom:1px solid var(--line)}
+th{background:var(--soft);font-size:13px;text-transform:uppercase;letter-spacing:.03em;color:var(--muted)}
+td.num{font-variant-numeric:tabular-nums}
+.faq{border:1px solid var(--line);border-radius:10px;padding:14px 18px;margin:0 0 12px}
+.faq h3{margin:0 0 6px;font-size:16.5px}
+.faq p{margin:0}
+.note{font-size:13.5px;color:var(--muted);background:var(--soft);border:1px solid var(--line);border-radius:10px;padding:12px 14px}
+.cards{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:8px 0 4px}
+@media(max-width:560px){.cards{grid-template-columns:1fr}}
+.card{border:1px solid var(--line);border-radius:10px;padding:12px 14px;text-decoration:none;display:block}
+.card:hover{border-color:var(--brand);background:var(--brand-soft)}
+.card b{display:block;color:var(--ink);font-size:15.5px;margin-bottom:2px}
+.card span{color:var(--muted);font-size:13.5px}
+footer.site{border-top:1px solid var(--line);margin-top:44px;padding:24px 0 40px;background:var(--soft)}
+footer.site p{font-size:13.5px;margin:0 0 8px}
+footer.site a{color:var(--muted);text-decoration:none;font-size:13.5px}
+footer.site a:hover{color:var(--brand)}
+.footlinks{display:flex;gap:14px;flex-wrap:wrap}
+.skip{position:absolute;left:-9999px}
+</style>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Home", "item": "https://calcmyads.com/"}, {"@type": "ListItem", "position": 2, "name": "Marketing ROI Calculator", "item": "https://calcmyads.com/roi-calculator.html"}]}</script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "WebApplication", "name": "Marketing ROI Calculator", "url": "https://calcmyads.com/roi-calculator.html", "applicationCategory": "BusinessApplication", "operatingSystem": "Any (web browser)", "browserRequirements": "Requires JavaScript", "description": "Free calculator that computes net marketing ROI from attributed revenue and total marketing cost.", "offers": {"@type": "Offer", "price": "0", "priceCurrency": "USD"}, "isAccessibleForFree": true, "publisher": {"@type": "Organization", "name": "CalcMyAds", "url": "https://calcmyads.com/"}}</script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "How do I calculate marketing ROI?", "acceptedAnswer": {"@type": "Answer", "text": "Subtract total marketing cost from the revenue it produced, divide by the marketing cost, then multiply by 100. $50,000 of revenue from $12,500 of cost is a 300% ROI."}}, {"@type": "Question", "name": "What is a good marketing ROI?", "acceptedAnswer": {"@type": "Answer", "text": "There is no universal number, but a common working target is a 5:1 ratio of revenue to cost, which is a 400% ROI. Service businesses with high margins can accept lower; low-margin retail needs higher."}}, {"@type": "Question", "name": "Is ROI the same as ROAS?", "acceptedAnswer": {"@type": "Answer", "text": "No. ROAS compares revenue with ad spend only. ROI compares profit with all costs you include. A campaign can show a 4.00x ROAS and a modest ROI once product cost, creative and tools are added."}}, {"@type": "Question", "name": "Can marketing ROI be negative?", "acceptedAnswer": {"@type": "Answer", "text": "Yes, and it often is in the first period of a brand campaign or a new channel test. What matters is whether the ROI is improving and whether you set a limit on how long you will fund a negative return."}}, {"@type": "Question", "name": "Should ROI include product cost?", "acceptedAnswer": {"@type": "Answer", "text": "For a business-level answer, yes - otherwise you are measuring media efficiency, not profit. State your cost basis either way so the number can be compared."}}, {"@type": "Question", "name": "How often should I calculate marketing ROI?", "acceptedAnswer": {"@type": "Answer", "text": "Monthly for budget control and quarterly for channel decisions. Short windows are noisy, especially for lead generation where deals close weeks after the click."}}, {"@type": "Question", "name": "Does this calculator work for lead generation?", "acceptedAnswer": {"@type": "Answer", "text": "Yes. Use the revenue value of a lead rather than a sale: leads x lead-to-customer rate x customer value gives the revenue figure to enter."}}]}</script>
+</head>
+<body>
+<header class="site"><div class="wrap"><a class="brand" href="index.html">Calc<span>MyAds</span></a><nav class="main" aria-label="Main"><a href="index.html">CPM</a><a href="cpc-calculator.html">CPC</a><a href="ctr-calculator.html">CTR</a><a href="roas-calculator.html">ROAS</a><a href="roi-calculator.html" aria-current="page">ROI</a><a href="cpm-benchmarks.html">Benchmarks</a><a href="guides.html">Guides</a></nav></div></header>
+<main class="wrap">
+
+<p class="eyebrow">Return and profitability</p>
+<h1>Marketing ROI Calculator</h1>
+<p class="lead">Calculate net return on marketing cost &mdash; and see why ROI and ROAS give different answers about the same campaign.</p>
+
+<div class="answer"><p><b>Quick answer:</b> ROI = ((revenue &minus; marketing cost) &divide; marketing cost) &times; 100. $50,000 of revenue from $12,500 of marketing cost is a 300% ROI.</p></div>
+
+<section class="calc">
+  <h2>Calculate marketing ROI</h2>
+  <p class="hint" style="margin-bottom:14px">Enter total revenue attributed to marketing and the total cost of that marketing.</p>
+  <div class="grid">
+    <div>
+      <label for="rev">Revenue attributed to marketing (USD)</label>
+      <input id="rev" type="number" inputmode="decimal" min="0" step="any" placeholder="50000">
+    </div>
+    <div>
+      <label for="cost">Total marketing cost (USD)</label>
+      <input id="cost" type="number" inputmode="decimal" min="0" step="any" placeholder="12500">
+    </div>
+  </div>
+  <div class="result" role="status" aria-live="polite">
+    <p class="sub">Result</p>
+    <div class="big" id="out">&mdash;</div>
+    <p class="sub" id="sub">Enter revenue and marketing cost to calculate ROI.</p>
+  </div>
+  <p style="margin:14px 0 0"><button type="button" id="reset">Reset</button></p>
+</section>
+
+<h2>How to calculate marketing ROI</h2>
+<div class="formula">ROI = ((revenue &minus; marketing cost) &divide; marketing cost) &times; 100</div>
+<table>
+  <thead><tr><th>Revenue</th><th>Marketing cost</th><th>Calculation</th><th>ROI</th></tr></thead>
+  <tbody>
+    <tr><td class="num">$50,000</td><td class="num">$12,500</td><td>(($50,000 &minus; $12,500) &divide; $12,500) &times; 100</td><td class="num">300%</td></tr>
+    <tr><td class="num">$18,000</td><td class="num">$9,000</td><td>(($18,000 &minus; $9,000) &divide; $9,000) &times; 100</td><td class="num">100%</td></tr>
+    <tr><td class="num">$8,000</td><td class="num">$10,000</td><td>(($8,000 &minus; $10,000) &divide; $10,000) &times; 100</td><td class="num">&minus;20%</td></tr>
+  </tbody>
+</table>
+<p>A positive ROI means marketing returned more than it cost. Zero means break-even. Negative means it cost more than it produced &mdash; which is a legitimate result for a first-quarter brand-building investment, provided you know that is what you are doing.</p>
+
+<h2>ROI vs ROAS</h2>
+<p>These two are constantly confused, and the difference matters when you set targets:</p>
+<table>
+  <thead><tr><th>Metric</th><th>Formula</th><th>Answers</th><th>Same campaign</th></tr></thead>
+  <tbody>
+    <tr><td>ROAS</td><td>revenue &divide; ad spend</td><td>Revenue per dollar of media spend</td><td class="num">4.00x</td></tr>
+    <tr><td>ROI</td><td>((revenue &minus; total cost) &divide; total cost) &times; 100</td><td>Profit per dollar of everything you spent</td><td class="num">depends on cost basis</td></tr>
+  </tbody>
+</table>
+<p>Worked example: $12,000 of revenue from $3,000 of ad spend is a 4.00x <a href="roas-calculator.html">ROAS</a>. If the goods cost $4,800 and you also spent $1,000 on creative and tools, total cost is $8,800 against $12,000 of revenue &mdash; profit of $3,200, or a 36% ROI. Same campaign, two very different-looking numbers.</p>
+
+<h3>Which cost basis should ROI use?</h3>
+<ul>
+  <li><b>Media only</b> gives a number close to ROAS and is useful for comparing channels.</li>
+  <li><b>Media + creative + tools + agency fees</b> is the honest marketing ROI, and the number a finance team will ask for.</li>
+  <li><b>All costs including product and fulfilment</b> is the business ROI. It is the only version that tells you whether the company made money.</li>
+</ul>
+<p>Whichever you choose, state it. "ROI is 36%" is meaningless without the cost basis and the period.</p>
+
+<h2>What to include on each side</h2>
+<table>
+  <thead><tr><th>Revenue side</th><th>Cost side</th></tr></thead>
+  <tbody>
+    <tr><td>Attributed sales, net of returns and refunds</td><td>Media spend on every platform</td></tr>
+    <tr><td>Lead value for non-transactional campaigns</td><td>Creative production and photography</td></tr>
+    <tr><td>Subscription revenue recognised in the period</td><td>Tools, analytics and agency or freelance fees</td></tr>
+    <tr><td>Repeat purchases from customers acquired in the period</td><td>Discounts and promotional margin given away</td></tr>
+  </tbody>
+</table>
+<p class="note">Two adjustments change the answer most: <b>returns</b> (for apparel and other high-return categories, net revenue can be 20&ndash;30% below gross) and <b>repeat purchases</b> (a first-order ROI can look terrible while the cohort is profitable over 12 months). Decide which question you are answering before you calculate.</p>
+
+<h2>Using ROI to make decisions</h2>
+<ol>
+  <li><b>Set a floor.</b> Decide the minimum ROI you will accept for growth spending, and treat anything below it as a test with a time limit.</li>
+  <li><b>Compare channels on the same basis.</b> Same period, same revenue definition, same cost inclusions.</li>
+  <li><b>Check ROI next to ROAS.</b> A high ROAS with a low ROI means costs outside media are eating the margin.</li>
+  <li><b>Look at cohorts, not single months.</b> Repeat purchase changes ROI dramatically over 6&ndash;12 months, especially for subscription and consumable products.</li>
+</ol>
+
+<h2>Frequently asked questions</h2>
+<div class="faq"><h3>How do I calculate marketing ROI?</h3><p>Subtract total marketing cost from the revenue it produced, divide by the marketing cost, then multiply by 100. $50,000 of revenue from $12,500 of cost is a 300% ROI.</p></div>
+<div class="faq"><h3>What is a good marketing ROI?</h3><p>There is no universal number, but a common working target is a 5:1 ratio of revenue to cost, which is a 400% ROI. Service businesses with high margins can accept lower; low-margin retail needs higher.</p></div>
+<div class="faq"><h3>Is ROI the same as ROAS?</h3><p>No. ROAS compares revenue with ad spend only. ROI compares profit with all costs you include. A campaign can show a 4.00x ROAS and a modest ROI once product cost, creative and tools are added.</p></div>
+<div class="faq"><h3>Can marketing ROI be negative?</h3><p>Yes, and it often is in the first period of a brand campaign or a new channel test. What matters is whether the ROI is improving and whether you set a limit on how long you will fund a negative return.</p></div>
+<div class="faq"><h3>Should ROI include product cost?</h3><p>For a business-level answer, yes &mdash; otherwise you are measuring media efficiency, not profit. State your cost basis either way so the number can be compared.</p></div>
+<div class="faq"><h3>How often should I calculate marketing ROI?</h3><p>Monthly for budget control and quarterly for channel decisions. Short windows are noisy, especially for lead generation where deals close weeks after the click.</p></div>
+<div class="faq"><h3>Does this calculator work for lead generation?</h3><p>Yes. Use the revenue value of a lead rather than a sale: leads &times; lead-to-customer rate &times; customer value gives the revenue figure to enter.</p></div>
+
+<script>
+(function(){
+  var out=document.getElementById('out'),sub=document.getElementById('sub');
+  var f={rev:document.getElementById('rev'),cost:document.getElementById('cost')};
+  function v(el){var x=parseFloat(el.value);return isFinite(x)&&x>=0?x:null;}
+  function usd(x){return '$'+x.toLocaleString('en-US',{minimumFractionDigits:2,maximumFractionDigits:2});}
+  function run(){
+    var r=v(f.rev),c=v(f.cost),o='\u2014',msg='Enter revenue and marketing cost to calculate ROI.';
+    if(r!==null&&c!==null&&c>0){
+      var roi=(r-c)/c*100;
+      o=roi.toFixed(0)+'% ROI';
+      msg='Profit '+usd(r-c)+' on '+usd(c)+' of marketing cost';
+      if(roi<0){msg+=' \u2014 below break-even';}
+    }
+    out.innerHTML=o;sub.textContent=msg;
+  }
+  ['input','change'].forEach(function(ev){[f.rev,f.cost].forEach(function(el){el.addEventListener(ev,run);});});
+  document.getElementById('reset').addEventListener('click',function(){f.rev.value='';f.cost.value='';run();});
+  run();
+})();
+</script>
+
+<h2>Related calculators</h2><div class="cards"><a class="card" href="index.html"><b>CPM Calculator</b><span>cost per 1,000 impressions</span></a><a class="card" href="ad-cost-calculator.html"><b>Ad Cost Calculator</b><span>campaign cost from CPM</span></a><a class="card" href="impressions-calculator.html"><b>Impressions Calculator</b><span>impressions from budget</span></a><a class="card" href="roas-calculator.html"><b>ROAS Calculator</b><span>return on ad spend</span></a><a class="card" href="ctr-calculator.html"><b>CTR Calculator</b><span>click-through rate</span></a><a class="card" href="cpc-calculator.html"><b>CPC Calculator</b><span>cost per click</span></a><a class="card" href="ad-spend-calculator-for-squarespace.html"><b>Ad Spend Calculator for Squarespace</b><span>budget for Squarespace stores</span></a><a class="card" href="ad-spend-calculator-for-wordpress.html"><b>Ad Spend Calculator for WordPress</b><span>budget for WordPress sites</span></a><a class="card" href="cpm-benchmarks.html"><b>CPM benchmarks 2026</b><span>reported ranges by platform and vertical</span></a></div>
+</main>
+<footer class="site"><div class="wrap"><div class="footlinks"><a href="index.html">CPM Calculator</a><a href="ad-cost-calculator.html">Ad Cost Calculator</a><a href="impressions-calculator.html">Impressions Calculator</a><a href="roas-calculator.html">ROAS Calculator</a><a href="ctr-calculator.html">CTR Calculator</a><a href="cpc-calculator.html">CPC Calculator</a><a href="ad-spend-calculator-for-squarespace.html">Ad Spend Calculator for Squarespace</a><a href="ad-spend-calculator-for-wordpress.html">Ad Spend Calculator for WordPress</a><a href="cpm-benchmarks.html">CPM benchmarks</a><a href="ecpm-calculator.html">eCPM</a><a href="guides.html">Guides</a><a href="about.html">About</a><a href="contact.html">Contact</a></div><p style="margin-top:14px">CalcMyAds is a free advertising calculator set: CPM, CPC, CTR, ROAS, ad cost and impressions. Calculations run in your browser and your numbers are never uploaded.</p><p>Results are planning estimates, not financial advice or a performance guarantee.</p></div></footer>
+</body>
+</html>

@@ -1,0 +1,197 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>CPM Benchmarks 2026 — CPM, CTR and ROAS Ranges by Platform</title>
+<meta name="description" content="2026 CPM benchmarks by platform and vertical, with CTR and ROAS ranges, US seasonality, a method for building your own benchmark, and full sources.">
+<link rel="canonical" href="https://calcmyads.com/cpm-benchmarks.html">
+<meta name="robots" content="index,follow,max-image-preview:large">
+<meta property="og:type" content="website">
+<meta property="og:title" content="CPM Benchmarks 2026 — CPM, CTR and ROAS Ranges by Platform">
+<meta property="og:description" content="2026 CPM benchmarks by platform and vertical, with CTR and ROAS ranges, US seasonality, a method for building your own benchmark, and full sources.">
+<meta property="og:url" content="https://calcmyads.com/cpm-benchmarks.html">
+<meta property="og:site_name" content="CalcMyAds">
+<meta name="twitter:card" content="summary">
+<style>
+:root{
+  --ink:#111827; --muted:#4b5563; --line:#e5e7eb; --bg:#ffffff; --soft:#f9fafb;
+  --brand:#1d4ed8; --brand-dark:#1e40af; --brand-soft:#eff6ff; --good:#047857;
+}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--bg);color:var(--ink);
+  font:16px/1.65 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif}
+.wrap{max-width:860px;margin:0 auto;padding:0 20px}
+header.site{border-bottom:1px solid var(--line);background:#fff;position:sticky;top:0;z-index:20}
+header.site .wrap{display:flex;align-items:center;gap:18px;min-height:60px;flex-wrap:wrap}
+.brand{font-weight:700;font-size:17px;color:var(--ink);text-decoration:none;letter-spacing:-.01em}
+.brand span{color:var(--brand)}
+nav.main{display:flex;gap:16px;flex-wrap:wrap;margin-left:auto}
+nav.main a{color:var(--muted);text-decoration:none;font-size:14px;font-weight:500}
+nav.main a:hover{color:var(--brand)}
+nav.main a[aria-current="page"]{color:var(--brand)}
+main{padding:28px 0 8px}
+.eyebrow{color:var(--brand);font-size:13px;font-weight:600;letter-spacing:.04em;text-transform:uppercase;margin:0 0 6px}
+h1{font-size:32px;line-height:1.2;margin:0 0 10px;letter-spacing:-.02em}
+h2{font-size:23px;line-height:1.3;margin:38px 0 10px;letter-spacing:-.01em}
+h3{font-size:18px;margin:24px 0 6px}
+p{margin:0 0 14px;color:var(--muted)}
+p.lead{font-size:18px;color:var(--ink)}
+ul,ol{color:var(--muted);padding-left:22px;margin:0 0 16px}
+li{margin:6px 0}
+a{color:var(--brand)}
+.answer{border-left:3px solid var(--brand);background:var(--brand-soft);padding:12px 16px;border-radius:0 8px 8px 0;margin:0 0 18px}
+.answer p{margin:0;color:var(--ink)}
+.calc{border:1px solid var(--line);border-radius:12px;background:var(--soft);padding:20px;margin:22px 0}
+.calc h2{margin:0 0 4px;font-size:19px}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+@media(max-width:560px){.grid{grid-template-columns:1fr}}
+label{display:block;font-size:13px;font-weight:600;color:var(--ink);margin-bottom:4px}
+input,select{width:100%;padding:10px 12px;border:1px solid #d1d5db;border-radius:8px;font-size:16px;background:#fff;color:var(--ink)}
+input:focus,select:focus{outline:2px solid var(--brand);outline-offset:1px;border-color:var(--brand)}
+.hint{font-size:12.5px;color:var(--muted);margin-top:4px}
+.result{margin-top:16px;border:1px solid #bfdbfe;background:#fff;border-radius:10px;padding:14px 16px}
+.result .big{font-size:30px;font-weight:700;color:var(--brand-dark);line-height:1.15;margin:2px 0 4px}
+.result .sub{font-size:13.5px;color:var(--muted);margin:0}
+button{font:inherit;padding:10px 14px;border-radius:8px;border:1px solid #d1d5db;background:#fff;color:var(--ink);cursor:pointer}
+button:hover{border-color:#9ca3af}
+button.primary{background:var(--brand);border-color:var(--brand);color:#fff}
+button.primary:hover{background:var(--brand-dark)}
+code{background:#f3f4f6;border:1px solid var(--line);border-radius:6px;padding:1px 6px;font-size:14.5px;
+  font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace}
+.formula{background:#111827;color:#f9fafb;border-radius:10px;padding:14px 16px;margin:0 0 16px;
+  font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:14.5px;overflow-x:auto}
+table{width:100%;border-collapse:collapse;margin:0 0 16px;font-size:15px}
+th,td{text-align:left;padding:9px 10px;border-bottom:1px solid var(--line)}
+th{background:var(--soft);font-size:13px;text-transform:uppercase;letter-spacing:.03em;color:var(--muted)}
+td.num{font-variant-numeric:tabular-nums}
+.faq{border:1px solid var(--line);border-radius:10px;padding:14px 18px;margin:0 0 12px}
+.faq h3{margin:0 0 6px;font-size:16.5px}
+.faq p{margin:0}
+.note{font-size:13.5px;color:var(--muted);background:var(--soft);border:1px solid var(--line);border-radius:10px;padding:12px 14px}
+.cards{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:8px 0 4px}
+@media(max-width:560px){.cards{grid-template-columns:1fr}}
+.card{border:1px solid var(--line);border-radius:10px;padding:12px 14px;text-decoration:none;display:block}
+.card:hover{border-color:var(--brand);background:var(--brand-soft)}
+.card b{display:block;color:var(--ink);font-size:15.5px;margin-bottom:2px}
+.card span{color:var(--muted);font-size:13.5px}
+footer.site{border-top:1px solid var(--line);margin-top:44px;padding:24px 0 40px;background:var(--soft)}
+footer.site p{font-size:13.5px;margin:0 0 8px}
+footer.site a{color:var(--muted);text-decoration:none;font-size:13.5px}
+footer.site a:hover{color:var(--brand)}
+.footlinks{display:flex;gap:14px;flex-wrap:wrap}
+.skip{position:absolute;left:-9999px}
+</style>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Home", "item": "https://calcmyads.com/"}, {"@type": "ListItem", "position": 2, "name": "CPM benchmarks 2026", "item": "https://calcmyads.com/cpm-benchmarks.html"}]}</script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "Dataset", "name": "CPM benchmarks 2026", "description": "Aggregated reported CPM, CTR and ROAS ranges by advertising platform and vertical for 2026.", "creator": {"@type": "Organization", "name": "CalcMyAds"}, "dateModified": "2026-10-13", "license": "https://creativecommons.org/licenses/by/4.0/", "isAccessibleForFree": true}</script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "CPM benchmarks 2026: platforms, verticals and seasonality", "datePublished": "2026-10-13", "dateModified": "2026-10-13", "author": {"@type": "Organization", "name": "CalcMyAds"}, "publisher": {"@type": "Organization", "name": "CalcMyAds"}}</script>
+</head>
+<body>
+<header class="site"><div class="wrap"><a class="brand" href="index.html">Calc<span>MyAds</span></a><nav class="main" aria-label="Main"><a href="index.html">CPM</a><a href="cpc-calculator.html">CPC</a><a href="ctr-calculator.html">CTR</a><a href="roas-calculator.html">ROAS</a><a href="roi-calculator.html">ROI</a><a href="cpm-benchmarks.html" aria-current="page">Benchmarks</a><a href="guides.html">Guides</a></nav></div></header>
+<main class="wrap">
+
+<p class="eyebrow">Benchmarks</p>
+<h1>CPM benchmarks 2026: platforms, verticals and seasonality</h1>
+<p class="lead">Reported CPM and CTR ranges for the major advertising platforms, with the sources listed, plus a method for building your own benchmark from your account data.</p>
+
+<div class="answer"><p><b>The short version:</b> in 2026 US inventory, most social and display campaigns land between <b>$4 and $15 CPM</b>. LinkedIn runs $30&ndash;$100. Q4 costs 20&ndash;30% more than the annual average. Your own account history beats every number on this page.</p></div>
+
+<h2>CPM ranges by platform</h2>
+<table>
+  <thead><tr><th>Platform</th><th>Reported CPM range</th><th>Notes</th></tr></thead>
+  <tbody>
+    <tr><td>Meta (Facebook + Instagram)</td><td class="num">~$5&ndash;$14</td><td>All-industry averages have been reported near $14 in 2026; broad reach buys sit under $10</td></tr>
+    <tr><td>TikTok</td><td class="num">~$4&ndash;$16</td><td>Low end for reach and ecommerce campaigns, high end for conversion-optimised delivery</td></tr>
+    <tr><td>Google Display &amp; programmatic</td><td class="num">~$2&ndash;$12</td><td>Cheapest inventory in digital; quality varies sharply by placement</td></tr>
+    <tr><td>YouTube (in-stream)</td><td class="num">~$6&ndash;$20</td><td>Priced higher than display, lower than premium TV</td></tr>
+    <tr><td>LinkedIn</td><td class="num">~$30&ndash;$100</td><td>Highest of the major platforms; professional targeting and a small, valuable audience</td></tr>
+    <tr><td>Pinterest</td><td class="num">~$5&ndash;$15</td><td>Seasonal spikes around US holiday planning</td></tr>
+    <tr><td>Google Search</td><td class="num">not CPM-priced</td><td>Convert with effective CPM = CPC &times; CTR% &times; 10</td></tr>
+  </tbody>
+</table>
+<p class="note"><b>How to read these numbers.</b> They are aggregated ranges reported across 2026 industry benchmark studies, not measurements from our own ad accounts. Platform averages move with the auction, so treat each range as a starting hypothesis and replace it with your account's actual CPM within two weeks.</p>
+
+<h2>Vertical cost tiers</h2>
+<p>Within one platform, the vertical moves CPM more than any other single factor. Directional tiers, derived from the platform ranges above and the competitive intensity of each vertical:</p>
+<table>
+  <thead><tr><th>Tier</th><th>Typical verticals</th><th>Why</th></tr></thead>
+  <tbody>
+    <tr><td>Low ($4&ndash;$9)</td><td>Broad retail, entertainment, apps, local services</td><td>Large audiences, many placements, moderate competition</td></tr>
+    <tr><td>Mid ($9&ndash;$20)</td><td>Ecommerce with defined audiences, health and wellness, education, travel</td><td>Targeting narrows the audience; seasonal peaks</td></tr>
+    <tr><td>High ($20&ndash;$60)</td><td>Finance, insurance, B2B software, professional services</td><td>High customer value attracts heavy competition</td></tr>
+    <tr><td>Very high ($60+)</td><td>Legal services in competitive US metros, some financial products</td><td>Case or contract value justifies aggressive bidding</td></tr>
+  </tbody>
+</table>
+<p>Two advertisers can report the same $12 CPM and be in completely different businesses. What matters is CPM relative to the value of a customer, not the absolute number.</p>
+
+<h2>CTR ranges by channel</h2>
+<table>
+  <thead><tr><th>Channel</th><th>Typical CTR</th></tr></thead>
+  <tbody>
+    <tr><td>Google Search (overall)</td><td class="num">~6&ndash;7%</td></tr>
+    <tr><td>Meta / Facebook feed</td><td class="num">~1%</td></tr>
+    <tr><td>TikTok in-feed</td><td class="num">~1% or higher</td></tr>
+    <tr><td>LinkedIn</td><td class="num">0.4&ndash;0.6%</td></tr>
+    <tr><td>Display and programmatic</td><td class="num">well under 1%</td></tr>
+    <tr><td>YouTube video ads</td><td class="num">well under 1% (clicks)</td></tr>
+  </tbody>
+</table>
+<p>CTR is only comparable inside one channel, placement and objective. Calculate your own with the <a href="ctr-calculator.html">CTR calculator</a>.</p>
+
+<h2>ROAS ranges</h2>
+<table>
+  <thead><tr><th>Segment</th><th>Reported ROAS</th></tr></thead>
+  <tbody>
+    <tr><td>Ecommerce overall (median)</td><td class="num">~2.0x &ndash; 2.9x</td></tr>
+    <tr><td>Apparel &amp; accessories</td><td class="num">~3.9x</td></tr>
+    <tr><td>Arts &amp; entertainment</td><td class="num">~3.2x</td></tr>
+    <tr><td>Beauty &amp; personal care</td><td class="num">~2.2x</td></tr>
+    <tr><td>Q4 holiday peak</td><td class="num">~4x &ndash; 5x</td></tr>
+  </tbody>
+</table>
+<p>Compare any of these against your break-even ROAS (1 &divide; gross margin) rather than treating them as pass marks. The <a href="roas-calculator.html">ROAS calculator</a> shows the break-even table.</p>
+
+<h2>Seasonality: the US advertising year</h2>
+<table>
+  <thead><tr><th>Period</th><th>Cost pressure</th><th>What usually happens</th></tr></thead>
+  <tbody>
+    <tr><td>January &ndash; February</td><td class="num">Lowest</td><td>Post-holiday demand resets; cheap inventory, lower conversion rates</td></tr>
+    <tr><td>March &ndash; June</td><td class="num">Moderate</td><td>Stable CPMs; good period for testing creative</td></tr>
+    <tr><td>July &ndash; August</td><td class="num">Moderate</td><td>Summer softness in some verticals, back-to-school spikes in others</td></tr>
+    <tr><td>September &ndash; October</td><td class="num">Rising</td><td>Advertisers load Q4 budgets; CPM climbs</td></tr>
+    <tr><td>November &ndash; December</td><td class="num">Highest</td><td>Holiday and BFCM competition; CPMs commonly 20&ndash;30% above the annual average</td></tr>
+  </tbody>
+</table>
+<p>Planning consequences: lock in creative and landing pages before October, expect your cost per acquisition to rise in November even if nothing in the account changed, and compare performance year over year rather than month over month.</p>
+
+<h2>Build your own benchmark in four steps</h2>
+<ol>
+  <li><b>Pull 90 days of platform data</b> by campaign: impressions, clicks, spend, conversions, revenue.</li>
+  <li><b>Segment by objective and placement.</b> Blending awareness and conversion campaigns produces a number that describes nothing.</li>
+  <li><b>Compute the four core rates:</b> CPM, CTR, conversion rate and cost per acquisition. Add ROAS if you have revenue data.</li>
+  <li><b>Compare like with like.</b> Same platform, same objective, same quarter. Then set your target as the median of your best-performing month, not the average of everything.</li>
+</ol>
+<p>Use the <a href="index.html">CPM calculator</a>, <a href="cpc-calculator.html">CPC calculator</a> and <a href="roas-calculator.html">ROAS calculator</a> for the arithmetic at each step.</p>
+
+<h2>Download the data</h2>
+<p>The full benchmark table is available as a CSV for spreadsheets and internal reports: <a href="cpm-benchmarks-2026.csv" download>CPM benchmarks 2026 (CSV)</a>. Free to reuse with a link back to this page.</p>
+
+<h2>Methodology and sources</h2>
+<p>Ranges on this page aggregate publicly reported 2026 benchmark studies and platform cost guides. Where sources disagreed, the wider range is shown. No figure here is derived from our own ad accounts, and none is a guarantee of future cost.</p>
+<ul>
+  <li>Google Ads and paid search benchmarks: WordStream industry benchmark reporting.</li>
+  <li>Social platform costs: Hootsuite's social media advertising cost reporting.</li>
+  <li>Meta CPM and ROAS benchmarks: published Meta ads benchmark studies (2026).</li>
+  <li>Platform CPM comparison ranges: independent CPM benchmark trackers.</li>
+  <li>TikTok and LinkedIn cost ranges: platform-specific 2026 cost guides.</li>
+  <li>CTR by channel: cross-channel CTR reporting.</li>
+  <li>Ecommerce ROAS benchmarks: published ecommerce ROAS and CVR studies.</li>
+</ul>
+<p class="note"><b>Corrections welcome.</b> If you have data that contradicts a range here, <a href="contact.html">send it over</a> &mdash; benchmark pages are only as good as their sources. Last reviewed 13 October 2026.</p>
+
+<h2>Related calculators</h2><div class="cards"><a class="card" href="index.html"><b>CPM Calculator</b><span>cost per 1,000 impressions</span></a><a class="card" href="ad-cost-calculator.html"><b>Ad Cost Calculator</b><span>campaign cost from CPM</span></a><a class="card" href="impressions-calculator.html"><b>Impressions Calculator</b><span>impressions from budget</span></a><a class="card" href="roas-calculator.html"><b>ROAS Calculator</b><span>return on ad spend</span></a><a class="card" href="ctr-calculator.html"><b>CTR Calculator</b><span>click-through rate</span></a><a class="card" href="cpc-calculator.html"><b>CPC Calculator</b><span>cost per click</span></a><a class="card" href="ad-spend-calculator-for-squarespace.html"><b>Ad Spend Calculator for Squarespace</b><span>budget for Squarespace stores</span></a><a class="card" href="ad-spend-calculator-for-wordpress.html"><b>Ad Spend Calculator for WordPress</b><span>budget for WordPress sites</span></a><a class="card" href="roi-calculator.html"><b>Marketing ROI Calculator</b><span>net return on ad spend and cost</span></a></div>
+</main>
+<footer class="site"><div class="wrap"><div class="footlinks"><a href="index.html">CPM Calculator</a><a href="ad-cost-calculator.html">Ad Cost Calculator</a><a href="impressions-calculator.html">Impressions Calculator</a><a href="roas-calculator.html">ROAS Calculator</a><a href="ctr-calculator.html">CTR Calculator</a><a href="cpc-calculator.html">CPC Calculator</a><a href="ad-spend-calculator-for-squarespace.html">Ad Spend Calculator for Squarespace</a><a href="ad-spend-calculator-for-wordpress.html">Ad Spend Calculator for WordPress</a><a href="roi-calculator.html">Marketing ROI Calculator</a><a href="cpm-benchmarks.html">CPM benchmarks</a><a href="ecpm-calculator.html">eCPM</a><a href="guides.html">Guides</a><a href="about.html">About</a><a href="contact.html">Contact</a></div><p style="margin-top:14px">CalcMyAds is a free advertising calculator set: CPM, CPC, CTR, ROAS, ad cost and impressions. Calculations run in your browser and your numbers are never uploaded.</p><p>Results are planning estimates, not financial advice or a performance guarantee.</p></div></footer>
+</body>
+</html>
